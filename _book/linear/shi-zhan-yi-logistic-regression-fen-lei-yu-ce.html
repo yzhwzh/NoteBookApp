@@ -1,0 +1,412 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>实战一：Logistic Regression分类预测 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="在临床应用中，肺癌的两个亚型难以区分，因而利用转录组数据，寻找分子标记来辅助鉴别肺癌的两个亚型。">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-katex/katex.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../matrix/" />
+    
+    
+    <link rel="prev" href="logistic-regression.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    线性模型
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="logistic-regression.html">
+            
+                <a href="logistic-regression.html">
+            
+                    
+                    Logistic Regression
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="shi-zhan-yi-logistic-regression-fen-lei-yu-ce.html">
+            
+                <a href="shi-zhan-yi-logistic-regression-fen-lei-yu-ce.html">
+            
+                    
+                    实战一：Logistic Regression分类预测
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../matrix/">
+            
+                <a href="../matrix/">
+            
+                    
+                    矩阵降维
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >实战一：Logistic Regression分类预测</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5B9E;&#x6218;&#x4E00;&#xFF1A;logistic-regression&#x5206;&#x7C7B;&#x9884;&#x6D4B;">&#x5B9E;&#x6218;&#x4E00;&#xFF1A;Logistic Regression&#x5206;&#x7C7B;&#x9884;&#x6D4B;</h1>
+<h4 id="&#x6570;&#x636E;&#x641C;&#x96C6;&#x53CA;&#x63A2;&#x7D22;">&#x6570;&#x636E;&#x641C;&#x96C6;&#x53CA;&#x63A2;&#x7D22;</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Sample</th>
+<th style="text-align:center">LCLC</th>
+<th style="text-align:center">SCLC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TrainDataSet</td>
+<td style="text-align:center">30 &#x4F8B; (RNA Count)</td>
+<td style="text-align:center">21 &#x4F8B; (RNA count)</td>
+</tr>
+<tr>
+<td style="text-align:left">TestDataSet</td>
+<td style="text-align:center">66 &#x4F8B; (RNA Count)</td>
+<td style="text-align:center">53 &#x4F8B; (RNA FPKM)</td>
+</tr>
+<tr>
+<td style="text-align:left">Test2DataSet</td>
+<td style="text-align:center">66 &#x4F8B; (RNA Count)</td>
+<td style="text-align:center">15 &#x4F8B; (RNA FPKM)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>&#x8F6C;&#x5F55;&#x6570;&#x636E;&#x53EA;&#x4FDD;&#x7559;&#x7F16;&#x7801;RNA&#xFF0C;&#x5E76;&#x5168;&#x90E8;&#x8F6C;&#x6362;&#x4E3A;TPM&#x503C;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x884C;log&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x5229;&#x4E8E;&#x76F8;&#x4E92;&#x6BD4;&#x8F83;</li>
+</ul>
+<blockquote>
+<p>&#x8F6C;&#x5F55;&#x7EC4;&#x76F8;&#x5173;&#x6982;&#x5FF5;&#xFF1A;</p>
+<ol>
+<li>RPKM&#x662F;(Reads Per Kilobase per Million mapped reads) &#x7684;&#x7F29;&#x5199;&#xFF0C;&#x4EE3;&#x8868;&#x6BCF;&#x767E;&#x4E07;reads&#x4E2D;&#x6765;&#x81EA;&#x4E8E;&#x67D0;&#x57FA;&#x56E0;&#x6BCF;&#x5343;&#x78B1;&#x57FA;&#x957F;&#x5EA6;&#x7684;reads&#x6570;&#x3002;RPKM&#x662F;&#x5C06;map&#x5230;&#x57FA;&#x56E0;&#x7684;read&#x6570;&#x9664;&#x4EE5;map&#x5230;&#x57FA;&#x56E0;&#x7EC4;&#x4E0A;&#x7684;&#x6240;&#x6709;read&#x6570;(&#x4EE5;million&#x4E3A;&#x5355;&#x4F4D;)&#x4E0E;RNA&#x7684;&#x957F;&#x5EA6;(&#x4EE5;KB&#x4E3A;&#x5355;&#x4F4D;)</li>
+<li>FPKM (Fragments Per Kilobase per Million mapped reads) &#x662F;&#x5C06;Map&#x5230;&#x57FA;&#x56E0;&#x7684;Fragments&#x6570;&#x9664;&#x4EE5;Map&#x5230;Genome&#x7684;&#x6240;&#x6709;Read&#x6570;(&#x4EE5;Million&#x4E3A;&#x5355;&#x4F4D;)&#x4E0E;RNA&#x7684;&#x957F;&#x5EA6;(&#x4EE5;KB&#x4E3A;&#x5355;&#x4F4D;)&#x3002;</li>
+<li>TPM (Transcripts Per Million) ,&#x5148;&#x9664;&#x4EE5;&#x57FA;&#x56E0;&#x957F;&#x5EA6;&#xFF0C;&#x518D;&#x9664;&#x77EB;&#x6B63;&#x540E;&#x7684;&#x603B;reads count&#x6570;&#xFF08;&#x5373;&#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x57FA;&#x56E0; reads&#x6570;&#x9664;&#x4EE5;&#x5404;&#x81EA;&#x957F;&#x5EA6;&#x540E;&#x7684;&#x7D2F;&#x52A0;&#x503C;&#xFF09;&#xFF0C;&#x4F1A;&#x53D1;&#x73B0;&#x6BCF;&#x4E2A;&#x6837;&#x672C;TPM&#x7684;&#x603B;&#x548C;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x56E0;&#x800C;TPM&#x6570;&#x503C;&#x80FD;&#x4F53;&#x73B0;&#x51FA;&#x6BD4;&#x5BF9;&#x4E0A;&#x67D0;&#x4E2A;&#x57FA;&#x56E0;&#x7684;reads&#x7684;&#x6BD4;&#x4F8B;&#x3002;</li>
+</ol>
+<blockquote>
+<p>FPKM&#x4E0E;RPKM &#x5B9A;&#x4E49;&#x7C7B;&#x4F3C;&#xFF0C;&#x552F;&#x4E00;&#x533A;&#x522B;&#x662F;FPKM&#x9002;&#x7528;&#x4E8E;&#x53CC;&#x7AEF;&#x6D4B;&#x5E8F;&#x6587;&#x5E93;&#xFF0C;FPKM&#x4F1A;&#x5C06;&#x914D;&#x5BF9;&#x6BD4;&#x5BF9;&#x5230;&#x4E00;&#x4E2A;&#x7247;&#x6BB5;&#x4E0A;&#x7684;&#x4E24;&#x4E2A;reads&#x8BA1;&#x7B97;&#x4E00;&#x6B21;&#x3002;&#x800C;RPKM&#x662F;&#x5206;&#x5F00;&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x56E0;&#x800C;&#x9002;&#x7528;&#x4E8E;&#x5355;&#x7AEF;&#x6D4B;&#x5E8F;&#x6587;&#x5E93;&#x3002;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mi>P</mi><mi>K</mi><msub><mi>M</mi><mi>r</mi></msub><mo>=</mo><mfrac><mrow><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac><mo>&#x2217;</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mi>r</mi></mrow><mi>g</mi></msubsup><msub><mi>n</mi><mi>r</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">FPKM_r = \frac{\frac{n_r}{L_{r}}*10^6}{ \sum_{i=r}^g n_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.2747199999999999em;"></span><span class="strut bottom" style="height:1.8389799999999998em;vertical-align:-0.5642599999999999em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.10903em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord reset-textstyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.3638599999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="top:0.074995em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.28628571428571425em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">=</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span style="top:-0.4836857142857143em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.6508em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord scriptstyle uncramped mtight"><span class="mord reset-scriptstyle scriptstyle uncramped mtight"><span class="mopen sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.344em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22142857142857142em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle textstyle uncramped frac-line"></span></span><span style="top:-0.47857142857142865em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord scriptscriptstyle uncramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span></span><span class="mbin mtight">&#x2217;</span><span class="mord mathrm mtight">1</span><span class="mord mtight"><span class="mord mathrm mtight">0</span><span class="msupsub"><span class="vlist"><span style="top:-0.431em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord mathrm mtight">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span> &#xFF1B; <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo>&#x2211;</mo><mrow><mi>r</mi><mo>=</mo><mi>i</mi></mrow></msub><mi>F</mi><mi>P</mi><mi>K</mi><msub><mi>M</mi><mi>r</mi></msub><mo>=</mo><mfrac><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>r</mi><mo>=</mo><mi>i</mi></mrow><mi>g</mi></msubsup><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac><mo>&#x2217;</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mi>r</mi></mrow><mi>g</mi></msubsup><msub><mi>n</mi><mi>r</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sum_{r=i} FPKM_r = \frac{\sum_{r=i}^g\frac{n_r}{L_{r}}*10^6}{ \sum_{i=r}^g n_r}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.2747199999999999em;"></span><span class="strut bottom" style="height:1.8389799999999998em;vertical-align:-0.5642599999999999em;"></span><span class="base textstyle uncramped"><span class="mop"><span class="mop op-symbol small-op" style="top:-0.0000050000000000050004em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.30001em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">=</span><span class="mord mathit mtight">i</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.10903em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord reset-textstyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.3638599999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="top:0.074995em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.28628571428571425em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">=</span><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span style="top:-0.4836857142857143em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.6508em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord scriptstyle uncramped mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="top:0.074995em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.2862857142857143em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">=</span><span class="mord mathit mtight">i</span></span></span></span><span style="top:-0.4836857142857142em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord reset-scriptstyle scriptstyle uncramped mtight"><span class="mopen sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.344em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22142857142857142em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle textstyle uncramped frac-line"></span></span><span style="top:-0.47857142857142865em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord scriptscriptstyle uncramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span></span><span class="mbin mtight">&#x2217;</span><span class="mord mathrm mtight">1</span><span class="mord mtight"><span class="mord mathrm mtight">0</span><span class="msupsub"><span class="vlist"><span style="top:-0.431em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord mathrm mtight">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span> &#xFF1B; <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mi>P</mi><msub><mi>M</mi><mi>r</mi></msub><mo>=</mo><mfrac><mrow><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac><mo>&#x2217;</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup></mrow><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>r</mi><mo>=</mo><mi>i</mi></mrow><mi>g</mi></msubsup><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac></mrow></mfrac></mrow><annotation encoding="application/x-tex">TPM_r = \frac{\frac{n_r}{L_{r}}*10^6}{\sum_{r=i}^g \frac{n_r}{L_{r}}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.2747199999999999em;"></span><span class="strut bottom" style="height:1.9793799999999997em;vertical-align:-0.7046599999999998em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.10903em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord reset-textstyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.36385999999999985em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="top:0.074995em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.28628571428571425em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">=</span><span class="mord mathit mtight">i</span></span></span></span><span style="top:-0.4836857142857143em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord reset-scriptstyle scriptstyle cramped mtight"><span class="mopen sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.344em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22142857142857142em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle textstyle uncramped frac-line"></span></span><span style="top:-0.47857142857142865em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.6508em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord scriptstyle uncramped mtight"><span class="mord reset-scriptstyle scriptstyle uncramped mtight"><span class="mopen sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.344em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22142857142857142em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle textstyle uncramped frac-line"></span></span><span style="top:-0.47857142857142865em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord scriptscriptstyle uncramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.2em;margin-right:0.1em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptscriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-scriptstyle textstyle uncramped nulldelimiter"></span></span><span class="mbin mtight">&#x2217;</span><span class="mord mathrm mtight">1</span><span class="mord mtight"><span class="mord mathrm mtight">0</span><span class="msupsub"><span class="vlist"><span style="top:-0.431em;margin-right:0.07142857142857144em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle uncramped mtight"><span class="mord mathrm mtight">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span></p>
+<p>&#x4E24;&#x8005;&#x8F6C;&#x6362;&#xFF1A;</p>
+</blockquote>
+</blockquote>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi>F</mi><mi>P</mi><mi>K</mi><msub><mi>M</mi><mi>r</mi></msub></mrow><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>r</mi><mo>=</mo><mi>i</mi></mrow><mi>g</mi></msubsup><mi>F</mi><mi>P</mi><mi>K</mi><msub><mi>M</mi><mi>r</mi></msub></mrow></mfrac><mo>&#x2217;</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo>=</mo><mfrac><mrow><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac></mrow><mrow><msubsup><mo>&#x2211;</mo><mrow><mi>r</mi><mo>=</mo><mi>i</mi></mrow><mi>g</mi></msubsup><mfrac><mrow><msub><mi>n</mi><mi>r</mi></msub></mrow><mrow><msub><mi>L</mi><mrow><mi>r</mi></mrow></msub></mrow></mfrac></mrow></mfrac><mo>&#x2217;</mo><mn>1</mn><msup><mn>0</mn><mn>6</mn></msup><mo>=</mo><mi>T</mi><mi>P</mi><mi>M</mi></mrow><annotation encoding="application/x-tex">
+\frac{FPKM_r}{\sum_{r=i}^g FPKM_r} * 10^6= \frac{\frac{n_r}{L_{r}}}{\sum_{r=i}^g \frac{n_r}{L_{r}}} * 10^6 = TPM
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:1.546592em;"></span><span class="strut bottom" style="height:2.677692em;vertical-align:-1.1311em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord reset-textstyle displaystyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.686em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle cramped"><span class="mord textstyle cramped"><span class="mop"><span class="mop op-symbol small-op" style="top:-0.0000050000000000050004em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.276864em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">=</span><span class="mord mathit mtight">i</span></span></span></span><span style="top:-0.480908em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.10903em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.2300000000000001em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.677em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped"><span class="mord textstyle uncramped"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.07153em;">K</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.10903em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span><span class="mbin">&#x2217;</span><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="msupsub"><span class="vlist"><span style="top:-0.413em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord reset-textstyle displaystyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.686em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle cramped"><span class="mord textstyle cramped"><span class="mop"><span class="mop op-symbol small-op" style="top:-0.0000050000000000050004em;">&#x2211;</span><span class="msupsub"><span class="vlist"><span style="top:0.276864em;margin-left:0em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span><span class="mrel mtight">=</span><span class="mord mathit mtight">i</span></span></span></span><span style="top:-0.480908em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.03588em;">g</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mord reset-textstyle textstyle cramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.4100999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.8351em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped"><span class="mord textstyle uncramped"><span class="mord reset-textstyle textstyle uncramped"><span class="mopen sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span><span class="mfrac"><span class="vlist"><span style="top:0.345em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle cramped mtight"><span class="mord scriptstyle cramped mtight"><span class="mord mtight"><span class="mord mathit mtight">L</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span style="top:-0.22999999999999998em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle textstyle uncramped frac-line"></span></span><span style="top:-0.4100999999999999em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord scriptstyle uncramped mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="msupsub"><span class="vlist"><span style="top:0.143em;margin-right:0.07142857142857144em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-scriptstyle scriptscriptstyle cramped mtight"><span class="mord mathit mtight" style="margin-right:0.02778em;">r</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span></span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span><span class="mclose sizing reset-size5 size5 reset-textstyle textstyle uncramped nulldelimiter"></span></span><span class="mbin">&#x2217;</span><span class="mord mathrm">1</span><span class="mord"><span class="mord mathrm">0</span><span class="msupsub"><span class="vlist"><span style="top:-0.413em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span><span class="reset-textstyle scriptstyle uncramped mtight"><span class="mord mathrm mtight">6</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">&#x200B;</span></span>&#x200B;</span></span></span></span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.13889em;">T</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mord mathit" style="margin-right:0.10903em;">M</span></span></span></span></span></p>
+<ul>
+<li>&#x67E5;&#x770B;&#x8BAD;&#x7EC3;&#x96C6;&#x548C;&#x6D4B;&#x8BD5;&#x96C6;&#x7684;&#x5206;&#x5E03;&#x60C5;&#x51B5;&#xFF0C;&#x56E0;&#x7279;&#x5F81;&#x662F;&#x57FA;&#x56E0;&#xFF0C;&#x6570;&#x76EE;&#x592A;&#x591A;&#xFF0C;&#x56E0;&#x800C;&#x9700;&#x8981;&#x964D;&#x7EF4;&#xFF0C;&#x67E5;&#x770B;&#x5728;&#x524D;&#x4E24;&#x4E2A;&#x4E3B;&#x6210;&#x5206;&#x7684;&#x5206;&#x5E03;&#x60C5;&#x51B5;</li>
+</ul>
+<p><img src="../.gitbook/assets/testpca.png" alt=""> <img src="../.gitbook/assets/test2pca%20%281%29.png" alt=""></p>
+<blockquote>
+<p>&#x867D;&#x7136;&#x56DB;&#x4E2A;&#x6570;&#x636E;&#x96C6;&#x90FD;&#x5404;&#x81EA;&#x805A;&#x4E3A;&#x4E00;&#x7C7B;&#xFF0C;&#x4F46;&#x53D1;&#x73B0;SCLC&#x7684;&#x5206;&#x5E03;&#x8BAD;&#x7EC3;&#x96C6;&#x4E0E;&#x6D4B;&#x8BD5;&#x96C6;&#x5E76;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x662F;&#x56E0;&#x4E3A;&#x7279;&#x5F81;&#x503C;&#x592A;&#x591A;&#xFF0C;&#x56E0;&#x800C;&#x53EA;&#x8003;&#x8651;&#x901A;&#x8FC7;&#x6587;&#x732E;&#x603B;&#x7ED3;&#x7684;&#x4E00;&#x4E9B;&#x6709;&#x5DEE;&#x5F02;&#x7684;&#x7279;&#x5F81;&#x57FA;&#x56E0;&#x7684;&#x964D;&#x7EF4;&#x5206;&#x5E03;&#x60C5;&#x51B5;</p>
+</blockquote>
+<p><img src="../.gitbook/assets/testcandidatepca%20%281%29.png" alt=""> <img src="../.gitbook/assets/test2candidatepca%20%281%29.png" alt=""></p>
+<blockquote>
+<p>&#x53EA;&#x8003;&#x8651;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x7684;&#x5206;&#x5E03;&#xFF0C;&#x5728;&#x6D4B;&#x8BD5;&#x96C6;2&#x7684;&#x5206;&#x5E03;&#x4E2D;&#xFF0C;&#x540C;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x764C;&#x75C7;&#x805A;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5206;&#x5E03;&#x7C7B;&#x4F3C;&#xFF0C;&#x56E0;&#x800C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5224;&#x65AD;&#x6A21;&#x578B;&#x662F;&#x5426;&#x8FC7;&#x62DF;&#x5408;&#x3002;</p>
+</blockquote>
+<h4 id="&#x7279;&#x5F81;&#x57FA;&#x56E0;&#x7B5B;&#x9009;">&#x7279;&#x5F81;&#x57FA;&#x56E0;&#x7B5B;&#x9009;</h4>
+<p>&#x8FDB;&#x4E00;&#x6B65;&#x7B5B;&#x9009;&#x6807;&#x7B7E;&#xFF0C;&#x672C;&#x7814;&#x7A76;&#x7684;&#x76EE;&#x7684;&#x662F;&#x7B5B;&#x9009;&#x5206;&#x5B50;&#x6807;&#x7B7E;&#x8F85;&#x52A9;&#x9274;&#x522B;&#x80BA;&#x764C;&#x7684;&#x4E24;&#x4E2A;&#x4E9A;&#x578B;&#xFF0C;&#x56E0;&#x800C;&#x5728;&#x5E94;&#x7528;&#x4E0A;&#x8FFD;&#x6C42;&#x662F;&#x6700;&#x5C0F;&#x7684;&#x5206;&#x5B50;&#x6807;&#x7B7E;&#x6709;&#x6700;&#x597D;&#x7684;&#x5206;&#x7C7B;&#x7ED3;&#x679C;&#x3002;&#x6B64;&#x65F6;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x8F83;&#x591A;&#xFF0C;&#x4E3A;&#x4E86;&#x8FDB;&#x4E00;&#x6B65;&#x7B5B;&#x9009;&#xFF0C;&#x5BF9;&#x8BAD;&#x7EC3;&#x96C6;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x4E9A;&#x578B;&#x8F6C;&#x5F55;&#x672C;&#x505A;&#x5DEE;&#x5F02;&#x57FA;&#x56E0;&#x5206;&#x6790;&#xFF0C;&#x7B5B;&#x9009;&#x51FA;&#x5DEE;&#x5F02;&#x8868;&#x8FBE;&#x7684;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x3002;</p>
+<p><img src="../.gitbook/assets/deseq%20%281%29.png" alt=""> <img src="../.gitbook/assets/edger.png" alt=""></p>
+<p>&#x4E24;&#x79CD;&#x5DEE;&#x5F02;&#x5206;&#x6790;&#x5DE5;&#x5177;&#x5305;&#xFF0C;&#x53D6;&#x4EA4;&#x96C6;&#xFF0C;&#x6700;&#x7EC8;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x96C6;&#x5408;&#x4E2D;&#x6709;&#x5DEE;&#x5F02;&#x8868;&#x8FBE;&#x7684;&#x57FA;&#x56E0;&#x5982;&#x4E0B;&#xFF1B;</p>
+<p><img src="../.gitbook/assets/trans.png" alt=""></p>
+<p>&#x5C06;&#x5019;&#x9009;&#x7684;&#x57FA;&#x56E0;&#x6807;&#x7B7E;&#xFF0C;&#x901A;&#x8FC7;&#x6587;&#x732E;&#x5206;&#x4E3A;&#x4E09;&#x7C7B;&#xFF0C;&#x5148;&#x9A8C;&#x8F6C;&#x5F55;&#x7EC4;&#x6807;&#x7B7E;&#x4FDD;&#x7559;&#x4E86;18&#x4E2A;&#x57FA;&#x56E0;(&#x5982;&#x4E0A;&#x56FE;&#x6240;&#x793A;)&#xFF0C;&#x5148;&#x9A8C;&#x7A81;&#x53D8;&#x57FA;&#x56E0;&#x6807;&#x7B7E;&#x4FDD;&#x7559;18&#x4E2A;&#xFF0C;CNV&#x53D8;&#x5F02;&#x7684;&#x6807;&#x7B7E;&#x4FDD;&#x7559;6&#x4E2A;&#xFF0C;&#x4ECE;&#x4E0A;&#x56FE;&#x80FD;&#x591F;&#x770B;&#x51FA;&#x6709;5&#x4E2A;&#x57FA;&#x56E0;&#xFF0C;&#x5176;&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x548C;&#x6D4B;&#x8BD5;&#x96C6;&#x7684;&#x5206;&#x5E03;&#x5E76;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x5360;&#x6BD4;&#x5E76;&#x4E0D;&#x9AD8;&#xFF0C;&#x8FD9;&#x8BF4;&#x660E;&#x7528;&#x57FA;&#x56E0;&#x7684;&#x8F6C;&#x5F55;&#x672C;&#x505A;&#x7279;&#x5F81;&#x6807;&#x7B7E;&#xFF0C;&#x5BF9;&#x5355;&#x4E2A;&#x57FA;&#x56E0;&#x6765;&#x8BB2;&#x8868;&#x8FBE;&#x8D8B;&#x52BF;&#x56E0;&#x4E3A;&#x53D7;&#x5F88;&#x591A;&#x56E0;&#x7D20;&#x5F71;&#x54CD;&#xFF0C;&#x4F1A;&#x5B58;&#x5728;&#x4E00;&#x5B9A;&#x7684;&#x968F;&#x673A;&#x6027;&#xFF0C;&#x6709;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x6A21;&#x578B;&#x4E0D;&#x591F;&#x51C6;&#x786E;&#x3002;</p>
+<h4 id="&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x53CA;&#x9884;&#x6D4B;">&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x53CA;&#x9884;&#x6D4B;</h4>
+<p>&#x5BF9;&#x4E8E;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x6709;&#x5F88;&#x591A;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#xFF0C;&#x76EE;&#x524D;&#x4E3B;&#x8981;&#x91C7;&#x7528;&#x7684;&#x662F;Logistic Regression&#x3002;</p>
+<p>&#x5728;Logistic Regression&#x6A21;&#x578B;&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6DFB;&#x52A0;&#x4E86;L1&#x6B63;&#x5219;&#x9879;&#xFF0C;&#x4EE5;&#x5229;&#x4E8E;&#x4EA7;&#x751F;&#x7A00;&#x758F;&#x7CFB;&#x6570;&#x77E9;&#x9635;&#xFF0C;&#x5229;&#x4E8E;&#x7279;&#x5F81;&#x7B5B;&#x9009;&#xFF0C;&#x91C7;&#x7528;&#x5750;&#x6807;&#x8F74;&#x4E0B;&#x964D;&#x6CD5;&#xFF0C;&#x56DE;&#x5F52;&#x4EA4;&#x53C9;&#x9A8C;&#x8BC1;&#x8FDB;&#x884C;&#x8C03;&#x53C2;&#xFF0C;&#x5BFB;&#x627E;&#x6700;&#x4F18;&#x6B63;&#x5219;&#x7CFB;&#x6570;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF0C;&#x4E3B;&#x8981;&#x91C7;&#x7528;sklearn&#x5DE5;&#x5177;&#x5305;&#x3002;</p>
+<pre><code class="lang-text">from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression,LogisticRegressionCV
+from sklearn.metrics import roc_auc_score,roc_curve,auc
+from sklearn.model_selection import cross_val_score
+
+model = LogisticRegressionCV(Cs=np.logspace(-2, 2, 20), 
+        solver=&apos;liblinear&apos;,cv=10,penalty=&apos;l1&apos;,
+        max_iter=5000,class_weight=&apos;balanced&apos;)
+
+fig = plt.figure(figsize=(20,5))
+transcoef = []
+mutcoef = []
+cnvcoef = []
+
+for n,i in enumerate([trans,mut,cnv]):
+    model.fit(Train.loc[:,i],Train[&apos;Cancer&apos;])
+    test_predict = model.predict_proba(Test.loc[:,i])
+    test_predict2 = model.predict_proba(Test2.loc[:,i])
+    fpr, tpr, thresholds = roc_curve(Test[&apos;Cancer&apos;], y_score=test_predict[:,1], pos_label=1)
+    fpr2, tpr2, thresholds2 = roc_curve(Test2[&apos;Cancer&apos;], y_score=test_predict2[:,1], pos_label=1)
+    roc_auc= auc(fpr, tpr)
+    roc_auc2= auc(fpr2, tpr2)
+    test_auc = roc_auc_score(Test[&apos;Cancer&apos;], y_score=test_predict[:,1])
+    lw = 2
+    ax = plt.subplot(1,3,n+1)
+    ax.plot(fpr, tpr, color=&apos;darkorange&apos;,lw=lw, label=&apos;Test_ROC curve (area = %0.3f)&apos; %roc_auc)
+    ax.plot(fpr2, tpr2, color=&apos;#6e8cbe&apos;,lw=lw, label=&apos;Test2_ROC curve (area = %0.3f)&apos; %roc_auc2)
+    print (test_auc)
+    ax.plot([0, 1], [0, 1], color=&apos;navy&apos;, lw=lw, linestyle=&apos;--&apos;)
+    ax.set_xlim([0.0, 1.0])
+    ax.set_ylim([0.0, 1.05])
+    ax.set_xlabel(&apos;False Positive Rate&apos;)
+    ax.set_ylabel(&apos;True Positive Rate&apos;)
+    if n == 0:
+        title = &apos;Transcript Candidate Genes&apos;
+        transcoef = model.coef_
+    elif n == 1:
+        title = &apos;Mutation Candidate Genes&apos;
+        mutcoef = model.coef_
+    elif n == 2:
+        title = &apos;CNV Candidate Genes&apos;
+        cnvcoef = model.coef_
+    ax.set_title(title)
+    ax.legend(loc=&quot;lower right&quot;)
+</code></pre>
+<p>&#x7ED3;&#x679C;&#x5982;&#x4E0B;:</p>
+<p><img src="../.gitbook/assets/lr%20%281%29.png" alt=""></p>
+<p>&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x5148;&#x9A8C;&#x7684;&#x8F6C;&#x5F55;&#x5DEE;&#x5F02;&#x7684;&#x5019;&#x9009;&#x6807;&#x7B7E;&#xFF0C;CNV&#x5019;&#x9009;&#x6807;&#x7B7E;&#x6548;&#x679C;&#x8F83;&#x597D;&#xFF0C;&#x7A81;&#x53D8;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x51E0;&#x4E4E;&#x6CA1;&#x6709;&#x5206;&#x7C7B;&#x6548;&#x679C;&#xFF0C;This is rational&#xFF0C;&#x56E0;&#x4E3A;&#x7528;&#x7684;&#x662F;&#x8F6C;&#x5F55;&#x6570;&#x636E;&#xFF0C;CNV&#x53D8;&#x5316;&#x6709;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x8F6C;&#x5F55;&#x672C;&#x7684;&#x5DEE;&#x5F02;&#xFF0C;&#x800C;&#x7A81;&#x53D8;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x4F1A;&#x5BFC;&#x81F4;&#x8F6C;&#x5F55;&#x6C34;&#x5E73;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x6240;&#x4EE5;&#x5019;&#x9009;&#x6807;&#x7B7E;&#x91C7;&#x7528;Trans&#x548C;CNV&#x57FA;&#x56E0;&#x96C6;&#x5408;&#x3002;</p>
+<p>&#x6700;&#x7EC8;&#x5C06;Trans&#x548C;CNV&#x7CFB;&#x6570;&#x4E0D;&#x4E3A;0&#x7684;&#x57FA;&#x56E0;&#x5408;&#x5E76;&#x5230;&#x4E00;&#x8D77;&#xFF0C;&#x518D;&#x8FDB;&#x884C;&#x4E00;&#x6B21;&#x62DF;&#x5408;&#x548C;&#x9884;&#x6D4B;&#xFF0C;&#x4E0B;&#x56FE;&#x4E3A;&#x9884;&#x6D4B;&#x7ED3;&#x679C;&#xFF0C;&#x5728;&#x4E24;&#x4E2A;&#x6D4B;&#x8BD5;&#x96C6;&#x4E2D;AUC&#x90FD;&#x5728;80%&#x4EE5;&#x4E0A;&#xFF0C;&#x6A21;&#x578B;&#x6548;&#x679C;&#x8FD8;&#x53EF;&#x4EE5;&#x3002;&#x6700;&#x7EC8;&#x627E;&#x51FA;&#x4E86;9&#x4E2A;&#x57FA;&#x56E0;&#x5206;&#x5B50;&#x6807;&#x7B7E;&#xFF0C;&#x4EE5;&#x7528;&#x6765;&#x8F85;&#x52A9;&#x9274;&#x522B;&#x80BA;&#x764C;&#x5206;&#x578B;&#x3002;</p>
+<p><img src="../.gitbook/assets/lr2.png" alt=""></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="logistic-regression.html" class="navigation navigation-prev " aria-label="Previous page: Logistic Regression">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../matrix/" class="navigation navigation-next " aria-label="Next page: 矩阵降维">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"description":"在临床应用中，肺癌的两个亚型难以区分，因而利用转录组数据，寻找分子标记来辅助鉴别肺癌的两个亚型。","title":"实战一：Logistic Regression分类预测","level":"1.2.2","depth":2,"next":{"title":"矩阵降维","level":"1.3","depth":1,"path":"matrix/README.md","ref":"matrix/README.md","articles":[]},"previous":{"title":"Logistic Regression","level":"1.2.1","depth":2,"path":"linear/logistic-regression.md","ref":"linear/logistic-regression.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["katex","livereload"],"pluginsConfig":{"katex":{},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linear/shi-zhan-yi-logistic-regression-fen-lei-yu-ce.md","mtime":"2020-04-14T02:04:02.693Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-04-14T02:14:02.604Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
