@@ -1,8 +1,8 @@
 ---
-description: 线性回归
+description: Linear Regression
 ---
 
-# Linear Regression
+# 线性回归
 
 ### 前言
 
