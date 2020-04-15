@@ -11,4 +11,5 @@
   * [线性判别分析与多维尺度变换](matrix/ldaandmds.md)
   * [非负矩阵分解](matrix/nmf.md)
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
+* [感知机](gan-zhi-ji.md)
 
