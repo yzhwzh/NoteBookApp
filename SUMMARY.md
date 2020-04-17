@@ -10,6 +10,7 @@
   * [主成分分析与奇异值分解](matrix/pcaandsvd.md)
   * [线性判别分析与多维尺度变换](matrix/ldaandmds.md)
   * [非负矩阵分解](matrix/nmf.md)
+  * [T分布随机邻接嵌入](matrix/t-fen-bu-sui-ji-lin-jie-qian-ru.md)
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
 * [感知机](gan-zhi-ji.md)
 * [决策树](jue-ce-shu.md)
