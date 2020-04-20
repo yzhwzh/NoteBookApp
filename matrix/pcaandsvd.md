@@ -62,7 +62,7 @@ $$
 u_i=\frac{Av_i}{|Av_i|}; |Av_i| = \sqrt{(Av_i)^T(Av_i)} = \sqrt{\lambda_i}
 $$
 
-  故 $$Av_i=\sqrt{\lambda_i}u_i=\sigma_i u_i$$ ，将向量组 $${u_1,u_2,⋯,u_r}$$ 扩充为 $$R^m$$ 中的标准正交基 $${u_1,u_2,...,u_r,...,u_m}$$ 。则：
+  故 $$Av_i=\sqrt{\lambda_i}u_i=\sigma_i u_i$$ ，将向量组 $${u_1,u_2,... ,u_r}$$ 扩充为 $$R^m$$ 中的标准正交基 $${u_1,u_2,...,u_r,...,u_m}$$ 。则：
 
 $$
 AV=A\begin{bmatrix} v_1 & v_2 & ... & v_n \end{bmatrix}= \begin{bmatrix} v_1 & v_2 & ... & v_r & 0 & ... & 0 \end{bmatrix} = \begin{bmatrix} \sigma_1u_1 & \sigma_2 u_2 & ... & \sigma_r u_r & 0 &...&0 \end{bmatrix}= U\Sigma
