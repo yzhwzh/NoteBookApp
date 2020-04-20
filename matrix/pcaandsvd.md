@@ -53,7 +53,7 @@ $$
         推导过程：对于任意矩阵, $$A^TA$$ 为n阶对称矩阵，可以将之作特征分解: $$A^TA=VDV^T$$ ;这个时候我们得到一组正交基 $$\{v_1,v_2,...,v_n\}$$ ，其特征值为 $$\lambda_i$$ ，即 $$A^TAv_i=\lambda_i v_i$$ ; 此时可以推导出 $$\{Av_1,Av_2,...,Av_n\}$$ 也是一组正交基，即 
 
 $$
-(Av_i)^T(Av_j)=v_i^TA^TAv_j=v_i^T(λ_jv_j)=λ_jv_i^Tv_j=0
+(Av_i)^T(Av_j)=v_i^TA^TAv_j=v_i^T(\lambda_jv_j)=\lambda_jv_i^Tv_j=0
 $$
 
 ，只是没有标准化，进一步标准化，令
