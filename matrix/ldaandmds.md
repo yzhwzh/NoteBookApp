@@ -17,7 +17,7 @@ PCA，SVD，LDA，MDS求解近似矩阵，都涉及特征值，特征向量求�
 投影之后的均值向量为：
 
 $$
-\overset \sim \mu_i = \frac{1}{N_i}\sum_{x_i\in \omega_i}W^Tx_i = W^T\frac{1}{N_i}\sum_{x_i\in \omega_i}x_i = W^T \mu_i
+\widetilde \mu_i = \frac{1}{N_i}\sum_{x_i\in \omega_i}W^Tx_i = W^T\frac{1}{N_i}\sum_{x_i\in \omega_i}x_i = W^T \mu_i
 $$
 
 **首先考虑二分类情况**
