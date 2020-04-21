@@ -1,6 +1,9 @@
 # Table of contents
 
 * [目录](README.md)
+* [线代和数统](xian-dai-he-shu-tong/README.md)
+  * [线性代数基础](xian-dai-he-shu-tong/xian-xing-dai-shu-ji-chu.md)
+  * [数理统计](xian-dai-he-shu-tong/shu-li-tong-ji.md)
 * [线性模型](linear/README.md)
   * [线性回归](linear/linear-regression.md)
   * [局部加权线性回归](linear/locally-weighted-linear-regression.md)
