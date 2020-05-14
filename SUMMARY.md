@@ -20,4 +20,5 @@
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
 * [感知机](gan-zhi-ji.md)
 * [决策树](jue-ce-shu.md)
+* [K邻近算法](k-lin-jin-suan-fa.md)
 
