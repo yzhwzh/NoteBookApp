@@ -21,4 +21,5 @@
 * [感知机](gan-zhi-ji.md)
 * [决策树](jue-ce-shu.md)
 * [K邻近算法](k-lin-jin-suan-fa.md)
+* [朴素贝叶斯](pu-su-bei-ye-si.md)
 
