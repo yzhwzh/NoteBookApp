@@ -40,31 +40,91 @@ $$
 
 因为分母对所有$$C_k$$都是相同的_，_所以$$y=argmax_{C_k}P(Y=C_k)\prod_{j=1}^n P(X^{(j)}=x^{(j)}|Y=C_k)$$**可以理解为分母是个常量？**
 
-2\). 损失函数 属于分类问题，选择$$0-1$$损失函数 $$L(Y,f(X))= \left\{\begin{array}{rl }+1,&Y \neq f(x)\\-1,&Y=f(x)\end{array} \right.$$ 这时期望风险函数为：$$R_{exp}(f) = E[L(Y,f(x))] = E_x\sum_{k=1}^K[L(c_k,f(X))]P[c_k|X]$$ 为了使期望风险最小化，只需要对$$X=x$$逐个极小化，由此得到 $$f(x) = argmin_{y\in Y} \sum_{k=1}^{K} L(c_k,f(X))P(c_k|X=x) = argmin_{y\in Y} \sum_{k=1}^{K} P(y \neq c_k | X=x) =argmin_{y\in Y} (1-P(y=c_k|X=x)) = argmax_{y\in Y} P(y=c_k|X=x)$$ 即朴素贝叶斯法所采用的原理。
+2\). 损失函数 属于分类问题，选择$$0-1$$损失函数
 
-3、算法 极大似然估计 先验概率$$P(Y=c_k)$$ _的极大似然估计_ $$P(Y=c_k) = \frac{\sum_{i=1}^N I(yi = c_k)}{N},k=1,2,...,K $$_设第_$$j$$_个特征_$$x^{(j)}$$_可能取值的集合为_$${a_{j1},a_{j2},...,a_{jn}}$$_，条件概率_$$P(X^{(j)}=a_{jl}|Y=c_k)$$_的极大似然估计是_$$P(X^{(j)}=a{jl}|Y=ck) = \frac{\sum{i=1}^N I(xi^{(j)}=a{jl},yi=c_k)}{\sum{i=1}^N I(yi=c_k)}, j=1,2,...,n; l=1,2,...,S_j; k=1,2,...,K; x_i^{(j)} $$_是第_$$i$$_个样本的第_$$j$$_个特征；_ $$a_{ij}$$是第$$j$$个特征可能取的第$$l$$个值，$$I$$为指示函数。
+$$
+L(Y,f(X))= \left\{\begin{array}{rl }+1,&Y \neq f(x)\\-1,&Y=f(x)\end{array} \right.
+$$
+
+ 这时期望风险函数为：
+
+$$
+R_{exp}(f) = E[L(Y,f(x))] = E_x\sum_{k=1}^K[L(C_k,f(X))]P[C_k|X]
+$$
+
+为了使期望风险最小化，只需要对$$X=x$$逐个极小化，由此得到
+
+$$
+f(x) = argmin_{y\in Y} \sum_{k=1}^{K} L(C_k,f(X))P(C_k|X=x) \\= argmin_{y\in Y} \sum_{k=1}^{K} P(y \neq C_k | X=x) \\=argmin_{y\in Y} (1-P(y=C_k|X=x)) \\ = argmax_{y\in Y} P(y=C_k|X=x)
+$$
+
+即朴素贝叶斯法所采用的原理。
+
+3、算法 极大似然估计 先验概率$$P(Y=C_k)$$ __的极大似然估计 
+
+$$
+P(Y=C_k) = \frac{\sum_{i=1}^N I(y_i = C_k)}{N},k=1,2,...,K
+$$
+
+设第$$j$$个特征$$x^{(j)}$$可能取值的集合为$${a_{j1},a_{j2},...,a_{jn}}$$，条件概率$$P(X^{(j)}=a_{jl}|Y=C_k)$$的极大似然估计是
+
+$$
+P(X^{(j)}=a_{jl}|Y=C_k) = \frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=C_k)}{\sum_{i=1}^N I(y_i=C_k)}, j=1,2,...,n; l=1,2,...,S_j; k=1,2,...,K
+$$
+
+; $$x_i^{(j)}$$是第$$i$$个样本的第$$j$$个特征； $$a_{ij}$$是第$$j$$个特征可能取的第$$l$$个值，$$I$$为指示函数。
 
 4、学习与分类算法
 
-输入：训练数据$$T={(x1,y_1),(x_2,y_2),...,(x_N,y_N)},其中x_i = (x_i^1,x_i^2,...,x_i^n)^T,x_i^j$$_是第_$$i$$_个样本的第_$$j$$_个特征，_$$x_i^j \in {a_{j1},a_{j2},...,a_{jn}}, a_{jl} $$是第$$j$$个特征可能的第$$l$$个值，$$j=1,2,...,n, l=1,2,...,S_j, y_i \in {c_1,c_2,...,c_k}$$;实例 $$x$$； 输出： 实例$$x$$的分类
+输入：训练数据
 
-步骤 1\) 计算先验概率和条件概率 $$P(Y=c_k) = \frac{\sum_{i=1}^N I(y_i = c_k)}{N},k=1,2,...,K$$ $$P(X^{(j)}=a_{jl}|Y=c_k) = \frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)}{\sum_{i=1}^N I(y_i=c_k)}$$
+$$
+T={(x_1,y_1),(x_2,y_2),...,(x_n,y_n)}
+$$
 
-2\) 对于给定的实例 $$x=(x^1,x^2,...,x^n)^T 计算P(Y=ck)\prod{j=1}^n P（X^{(j)}=x^{(j)}|Y=c_k)$$
+,其中$$x_i = (x_i^1,x_i^2,...,x_i^n)^T$$,$$x_i^j$$是第$$i$$个样本的第$$j$$个特征_，_$$x_i^j \in {a_{j1},a_{j2},...,a_{jn}}, a_{jl} $$是第$$j$$个特征可能的第$$l$$个值，$$j=1,2,...,n, l=1,2,...,S_j, y_i \in {c_1,c_2,...,c_k}$$;实例 $$x$$； 
 
-3\) 确定实例$$x$$的类$$y=argmax_{c_k}P(Y=c_k)\prod_{j=1}^n P（X^{(j)}=x^{(j)}|Y=c_k)$$
+输出： 实例$$x$$的分类
 
-5、贝叶斯估计 即在朴素贝叶斯算法上加入拉普拉斯平滑 $$P(X^{(j)}=a_{jl}|Y=c_k) = \frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=c_k)+\lambda}{\sum_{i=1}^N I(y_i=c_k)+S_j\lambda}$$ 公式中$$\lambda>=0$$,等价于在随机变量各个取值的频数上赋予一个正数 $$\lambda>0$$。 当$$\lambda=0$$时，就是极大似然估计，常取$$\lambda = 1$$,这时称为拉普拉斯平滑
+步骤 :
 
-先验概率的贝叶斯估计 $$P(Y=c_k) = \frac{\sum_{i=1}^N I(y_i = c_k)+\lambda}{N+K\lambda}$$
+1\) .  计算先验概率和条件概率
+
+$$
+P(Y=C_k) = \frac{\sum_{i=1}^N I(y_i = C_k)}{N},k=1,2,...,K
+$$
+
+$$
+P(X^{(j)}=a_{jl}|Y=C_k) = \frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=C_k)}{\sum_{i=1}^N I(y_i=C_k)}
+$$
+
+2\) . 对于给定的实例 $$x=(x^1,x^2,...,x^n)^T 计算$$
+
+$$
+P(Y=C_k)\prod_{j=1}^n P(X^{(j)}=x^{(j)}|Y=C_k)
+$$
+
+3\) . 确定实例$$x$$的类$$y=argmax_{C_k}P(Y=C_k)\prod_{j=1}^n P（X^{(j)}=x^{(j)}|Y=C_k)$$
+
+5、贝叶斯估计 即在朴素贝叶斯算法上加入拉普拉斯平滑 
+
+$$
+P(X^{(j)}=a_{jl}|Y=C_k) = \frac{\sum_{i=1}^N I(x_i^{(j)}=a_{jl},y_i=C_k)+\lambda}{\sum_{i=1}^N I(y_i=C_k)+S_j\lambda}
+$$
+
+ 公式中$$\lambda>=0$$,等价于在随机变量各个取值的频数上赋予一个正数 $$\lambda>0$$。 当$$\lambda=0$$时，就是极大似然估计，常取$$\lambda = 1$$,这时称为拉普拉斯平滑
+
+先验概率的贝叶斯估计 
+
+$$
+P(Y=C_k) = \frac{\sum_{i=1}^N I(y_i = C_k)+\lambda}{N+K\lambda}
+$$
 
 ```text
 ##使用贝叶斯进行文档分类
 ## **朴素贝叶斯的两个假设** 1、特征之间相互独立；2、每个特征同等重要
 
 from numpy import *
-
-
 
 ### 词集模型，每个词的出现与否作为一个特征，即只出现一次
 def loadDataSet():
