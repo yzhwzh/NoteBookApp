@@ -7,6 +7,7 @@
     * [1. 重要分布](xian-dai-he-shu-tong/shu-li-tong-ji/1.-zhong-yao-fen-bu.md)
     * [2. 参数估计](xian-dai-he-shu-tong/shu-li-tong-ji/2.-can-shu-gu-ji.md)
     * [3. 假设检验](xian-dai-he-shu-tong/shu-li-tong-ji/3.-jia-she-jian-yan.md)
+* [数据处理](shu-ju-chu-li.md)
 * [线性模型](linear/README.md)
   * [线性回归](linear/linear-regression.md)
   * [局部加权线性回归](linear/locally-weighted-linear-regression.md)
