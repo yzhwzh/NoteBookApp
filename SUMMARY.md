@@ -20,7 +20,7 @@
   * [T分布随机邻接嵌入](matrix/t-fen-bu-sui-ji-lin-jie-qian-ru.md)
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
 * [感知机](gan-zhi-ji.md)
-* [决策树](jue-ce-shu.md)
 * [K邻近算法](k-lin-jin-suan-fa.md)
 * [朴素贝叶斯](pu-su-bei-ye-si.md)
+* [决策树](jue-ce-shu.md)
 
