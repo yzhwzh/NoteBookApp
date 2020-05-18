@@ -21,7 +21,7 @@
   * Shape\(Traing Size, Test size\)
   * Label\(Binary or Multi or Regression, Distribution\) 对标签数据进行探索，是二分类，多分类，还是回归预测，以及标签数据分布情况，是否平衡
   * Columns\(Meaning, Numerical or Time or Category\)
-  * `Null` Values, how to deal with
+  * Null Values, how to deal with
   * Numerical variable: Distribution
   * Outliers
 
@@ -96,4 +96,44 @@ sns.distplot(data[data['Class']==1.0]['hour'],
 plt.xticks(range(0,24))
 plt.legend()
 ```
+
+```text
+### 比较省力的方法，通过包探测数据的分布情况
+# https://github.com/pandas-profiling/pandas-profiling
+import pandas_profiling
+
+profile = df.profile_report(title="Credit Fraud Detector")
+profile.to_file(output_file=Path("./credit_fraud_detector.html"))
+```
+
+
+
+> 欺诈数据的EDA Conclusion
+
+> * The data set is highly skewed, consisting of 492 frauds in a total of 284,807 observations. This resulted in only 0.172% fraud cases.
+> * There is no missing value in the dataset.
+> * The ‘Time’ and ‘Amount’ features are not transformed data.
+
+#### Outliers Detection 异常值探索
+
+* **Point anomalies**: A single instance of data is anomalous if it's too far off from the rest.
+* **Contextual anomalies**: The abnormality is context specific. This type of anomaly is common in time-series data.
+
+$$
+IQR=Q_3​−Q_1 \\ Outliers:>Q_3​+k⋅IQR \\ Outliers:<Q_1​−k⋅IQR
+$$
+
+> The higher $$k$$ is \(eg: 3\), the less outliers will detect, and the lower $$k$$ is \(eg: 1.5\) the more outliers it will detect.
+
+#### Unbalance  样本不平衡，解决方法：
+
+* Collect more data
+* Using the weights parameters 
+
+```text
+LogisticRegression(class_weight='balanced')
+# How to choose weights?
+```
+
+* Changing the performance metric: 改变评价指标
 
