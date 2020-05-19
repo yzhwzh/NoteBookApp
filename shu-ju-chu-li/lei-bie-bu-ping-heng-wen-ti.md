@@ -63,7 +63,7 @@ AUC（Area Under Curve）被定义为ROC曲线下的面积，显然这个面积�
 
 \*\*\*\*[**混淆矩阵**](https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Confusion_matrix)\*\*\*\*
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 * [ ]  **Mean Absolute Error\(MAE\)**
 
