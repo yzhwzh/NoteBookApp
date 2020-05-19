@@ -6,7 +6,7 @@ description: Non-negative Matrix Factorization
 
         对于任意给定的一个非负矩阵V，NMF算法能够寻找到一个非负矩阵W和一个非负矩阵H，使得满足，从而将一个非负的矩阵分解为左右两个非负矩阵的乘积。[如此图所示](https://pic2.zhimg.com/v2-e9491ec05171bc97e89402350c0e02d5_b.png)，其中约束条件即要求分解后的矩阵H和W都必须是非负矩阵。
 
-![](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%284%29.png)
 
 $$
 V_{fn} \approx  W_{fk}H_{kn}; s.t. \left\{\begin{array}{c} W_{fk} > 0 \\H_{kn} > 0 \end{array}\right.

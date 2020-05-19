@@ -1,4 +1,4 @@
-# 数据处理相关
+# 数据预处理相关
 
 #### 数据分析常规流程一般包括（A typical data science process might look like this）:
 
@@ -233,7 +233,7 @@ AUC（Area Under Curve）被定义为ROC曲线下的面积，显然这个面积�
 
 \*\*\*\*[**混淆矩阵**](https://en.wikipedia.org/wiki/Sensitivity_and_specificity#Confusion_matrix)\*\*\*\*
 
-![](.gitbook/assets/image%20%284%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 * [ ]  **Mean Absolute Error\(MAE\)**
 
@@ -297,9 +297,9 @@ X_tl, y_tl, id_tl = tl.fit_sample(X, y)
 plot_2d_space(X_tl, y_tl,X,y, 'Tomek links under-sampling')
 ```
 
-* [ ]  **Over-sampling: SMOTE \(Synthetic Minority Oversampling Technique\)** consists of synthesizing elements for the minority class, based on those that already exist. It works randomly picking a point from the minority class and computing the k-nearest neighbors for this point. The synthetic points are added between the chosen point and its neighbors.（从该少数类的全部 $$T $$个样本中找到样本$$ x_i$$ 的$$ k$$ 个近邻，然后从这$$ k$$ 个近邻中随机选择一个样本 $$x_i(nn)$$ ，再生成一个 0 到 1 之间的随机数 $$\epsilon_1$$ ，从而合成一个新样本 $$x_{i1}$$，重复$$N$$次）
+* [ ]  **Over-sampling: SMOTE \(Synthetic Minority Oversampling Technique\)** consists of synthesizing elements for the minority class, based on those that already exist. It works randomly picking a point from the minority class and computing the k-nearest neighbors for this point. The synthetic points are added between the chosen point and its neighbors.（从该少数类的全部 $$T $$个样本中找到样本$$ x_i$$ 的$$ k$$ 个近邻，然后从这$$ k$$ 个近邻中随机选择一个样本 $$x_i(nn)$$ ，再生成一个 0 到 1 之间的随机数 $$\epsilon_1$$ ，与该样本相加，从而合成一个新样本 $$x_{i1}$$，重复$$N$$次）
 
 #### 模型优化
 
-![](.gitbook/assets/image%20%281%29.png)
+![](../.gitbook/assets/image%20%287%29.png)
 
