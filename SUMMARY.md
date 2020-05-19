@@ -13,6 +13,7 @@
   * [缺失值处理](shu-ju-chu-li/que-shi-zhi-chu-li.md)
   * [类别不平衡问题](shu-ju-chu-li/lei-bie-bu-ping-heng-wen-ti.md)
   * [特征工程](shu-ju-chu-li/te-zheng-gong-cheng.md)
+  * [特征选择](shu-ju-chu-li/te-zheng-xuan-ze.md)
 * [线性模型](linear/README.md)
   * [线性回归](linear/linear-regression.md)
   * [局部加权线性回归](linear/locally-weighted-linear-regression.md)
