@@ -1,4 +1,4 @@
-# 数据预处理相关
+# 数据处理相关
 
 #### 数据分析常规流程一般包括（A typical data science process might look like this）:
 

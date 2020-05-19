@@ -97,6 +97,21 @@ $$
 
 > 这时, $$y_i$$ 为输入实例 $$x_i $$的真实类别, $$p_i$$ 为预测输入实例 $$x_i$$ 属于类别 $$1$$ 的概率. 对所有样本的对数损失表示对每个样本的对数损失的平均值, 对于完美的分类器, 对数损失为$$ 0$$ .
 
+* [ ] **再缩放**
+
+1. 假设对样本 $$\vec x$$  进行分类时，预测为正类的概率为 $$p$$ 。常规的做法是将 $$p$$ 与一个阈值，比如 0.5 ， 进行比较。 如果 $$p>0.5$$ 时，就判别该样本为正类。
+
+   概率 $$p$$ 刻画了样本为正类的可能性， 几率 $$\frac{p}{1-p}$$ 刻画了正类可能性与反类可能性的比值。
+
+2. 当存在类别不平衡时，假设 $$N^+$$  表示正类样本数目， $$N^-$$ 表示反类样本数目，则观测几率是 $$\frac{N^+}{N^-}$$ 。
+
+   假设训练集是真实样本总体的无偏采样，因此可以用观测几率代替真实几率。于是只要分类器的预测几率高于观测几率就应该判断为正类。即如果 $$\frac{p}{1-p} > \frac{N^+}{N^-}$$ ， 则预测为正类。
+
+3. 通常分类器都是基于概率值来进行预测的，因此需要对其预测值进行调整。在进行预测的时候，令： $$\frac{\tilde{p}}{1-\tilde{p}}=\frac{p}{1-p} \times \frac{N^+}{N^-}$$ 然后再将 $$\tilde{p}$$  跟阈值比较。这就是类别不平衡学习的一个基本策略：再缩放`rescalling` 。
+4. 再缩放虽然简单，但是由于“训练集是真实样本总体的无偏采样”这个假设往往不成立，所以无法基于训练集观测几率来推断出真实几率。
+
+
+
 * **Resampling the dataset 重抽样**
 * [ ]  Under-Sampling:    从多数集中选出一部分数据与少数集重新组合成一个新的数据集
 
@@ -128,6 +143,5 @@ plot_2d_space(X_tl, y_tl,X,y, 'Tomek links under-sampling')
 ```
 
 * [ ]  **Over-sampling: SMOTE \(Synthetic Minority Oversampling Technique\)** consists of synthesizing elements for the minority class, based on those that already exist. It works randomly picking a point from the minority class and computing the k-nearest neighbors for this point. The synthetic points are added between the chosen point and its neighbors.（从该少数类的全部 $$T $$个样本中找到样本$$ x_i$$ 的$$ k$$ 个近邻，然后从这$$ k$$ 个近邻中随机选择一个样本 $$x_i(nn)$$ ，再生成一个 0 到 1 之间的随机数 $$\epsilon_1$$ ，与该样本相加，从而合成一个新样本 $$x_{i1}$$，重复$$N$$次）
-
-#### 
+* \*\*\*\*
 
