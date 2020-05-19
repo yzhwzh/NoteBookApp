@@ -208,5 +208,5 @@ $$
 λ(n)∗mean(level)+(1−λ(n))∗mean (dataset)
 $$
 
- Where $$λ(n)=\frac{1}{1+exp(\frac{−(x−k)}{f})}$$. x=frequency, k=inflection point, f=steepness.  We can get graph in [desmos\_calculator](http://127.0.0.1:8888/files/Python/4.Kaggle/2.class/desmos.com/calculator).
+ Where $$λ(n)=\frac{1}{1+exp(\frac{−(x−k)}{f})}$$. x=frequency, k=inflection point, f=steepness.  
 
