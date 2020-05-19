@@ -200,5 +200,13 @@ data['Continent'] = np.select(conditions, choices, default='Other')  # Grouping 
 
 ![](../.gitbook/assets/image%20%2811%29.png)
 
+**Supplement:**
 
+**Weighted Average** It is better to calculate weighted average of the overall mean of the training set and the mean of the level:
+
+$$
+λ(n)∗mean(level)+(1−λ(n))∗mean (dataset)
+$$
+
+ Where $$λ(n)=\frac{1}{1+exp(\frac{−(x−k)}{f})}$$. x=frequency, k=inflection point, f=steepness.  We can get graph in [desmos\_calculator](http://127.0.0.1:8888/files/Python/4.Kaggle/2.class/desmos.com/calculator).
 
