@@ -1,6 +1,6 @@
 # 类别不平衡问题
 
-#### Unbalance  样本不平衡（0.4~0.6 之间认为是平衡的），解决方法：
+#### Unbalance  样本不平衡，解决方法：
 
 * Collect more data
 * Using the weights parameters 
