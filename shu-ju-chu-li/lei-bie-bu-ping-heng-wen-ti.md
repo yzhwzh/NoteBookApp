@@ -1,6 +1,6 @@
 # 类别不平衡问题
 
-#### Unbalance  样本不平衡，解决方法：
+#### Unbalance  样本不平衡（0.4~0.6 之间认为是平衡的），解决方法：
 
 * Collect more data
 * Using the weights parameters 
@@ -38,7 +38,7 @@ $$
 F1 = \frac{2*precision*recall}{precision+recall}
 $$
 
-* [ ] **对于类别不平衡问题，一般以数量较少的一类作为正类，这样准确和召回更具有指示意义\(即避免全部预测为占多数类别时指标就很高的情况出现\)**
+* [ ] 对于类别不平衡问题，**一般以数量较少的一类作为正类**，这样准确和召回更具有指示意义\(即避免全部预测为占多数类别时指标就很高的情况出现\)
 
 **Area Under Curve \(AUC\)**--Area Under the curve of the Receiver Operating Characteristic \(AUROC\)
 
