@@ -15,6 +15,7 @@
   * [数据集划分](shu-ju-chu-li/shu-ju-ji-hua-fen.md)
   * [特征工程](shu-ju-chu-li/te-zheng-gong-cheng.md)
   * [特征选择](shu-ju-chu-li/te-zheng-xuan-ze.md)
+* [模型评估](mo-xing-ping-gu.md)
 * [线性模型](linear/README.md)
   * [线性回归](linear/linear-regression.md)
   * [局部加权线性回归](linear/locally-weighted-linear-regression.md)
