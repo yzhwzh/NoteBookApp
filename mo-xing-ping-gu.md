@@ -252,7 +252,7 @@
    * 由于概率的乘积会因为很多原因不便使用（如容易出现数值下溢出），因此转换为对数的形式： $$\theta_{ML}=\arg\max_\theta\sum_{i=1}^{m}\log p_{model}(\mathbf{\vec x}_i;\theta)$$ 。
    * 因为 $$m$$ 与 $$\theta$$ 无关，因此它也等价于： $$\theta_{ML}=\arg\max_\theta\sum_{i=1}^{m}\frac 1m \log p_{model}(\mathbf{\vec x}_i;\theta)$$  。
    * 由于数据集的经验分布为： $$\hat p_{data}(\mathbf{\vec x})=\frac 1m\sum_{i=1}^{m}\delta(\mathbf{\vec x}-\mathbf{\vec x}_i)$$ ，其中 $$\delta(\cdot)$$ 为狄拉克函数。因此： $$\theta_{ML}=\arg\max_\theta\mathbb E_{\mathbf{\vec x}\sim \hat p_{data}} \log p_{model}(\mathbf{\vec x};\theta)$$ 。
-3. 考虑数据集的经验分布 $$\hat p_{data}$$ 和真实分布函数的估计量 $$p_{model}$$ 之间的差异，`KL`散度为： $$D|_{KL}(\hat p_{data} || p_{model};\theta) =\mathbb E_{\mathbf{\vec x}\sim \hat p_{data}}[\log \hat p_{data}(\mathbf{\vec x})-\log  p_{model}(\mathbf{\vec x;\theta})]$$ 
+3. 考虑数据集的经验分布 $$\hat p_{data}$$ 和真实分布函数的估计量 $$p_{model}$$ 之间的差异，`KL`散度（ 在信息系统中称为**相对熵**）为： $$D|_{KL}(\hat p_{data} || p_{model};\theta) =\mathbb E_{\mathbf{\vec x}\sim \hat p_{data}}[\log \hat p_{data}(\mathbf{\vec x})-\log  p_{model}(\mathbf{\vec x;\theta})]$$ 
 
    由于 $$\log \hat p_{data}(\mathbf{\vec x})$$  与 $$\theta$$ 无关，因此要使得 $$D|_{KL}(\hat p_{data} || p_{model};\theta)$$ 最小，则只需要最小化 $$\mathbb E_{\mathbf{\vec x}\sim \hat p_{data}}[-\log  p_{model}(\mathbf{\vec x};\theta)]$$ 。也就是最大化 $$\mathbb E_{\mathbf{\vec x}\sim \hat p_{data}} \log p_{model}(\mathbf{\vec x};\theta)$$ 。
 
