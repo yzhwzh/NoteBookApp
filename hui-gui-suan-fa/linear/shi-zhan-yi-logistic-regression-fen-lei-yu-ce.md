@@ -32,11 +32,11 @@ $$
 
 * 查看训练集和测试集的分布情况，因特征是基因，数目太多，因而需要降维，查看在前两个主成分的分布情况
 
-![](../.gitbook/assets/testpca.png) ![](../.gitbook/assets/test2pca.png)
+![](../../.gitbook/assets/testpca.png) ![](../../.gitbook/assets/test2pca.png)
 
 > 虽然四个数据集都各自聚为一类，但发现SCLC的分布训练集与测试集并不一致，有可能是因为特征值太多，因而只考虑通过文献总结的一些有差异的特征基因的降维分布情况
 
-![](../.gitbook/assets/testcandidatepca.png) ![](../.gitbook/assets/test2candidatepca.png)
+![](../../.gitbook/assets/testcandidatepca.png) ![](../../.gitbook/assets/test2candidatepca.png)
 
 > 只考虑候选标签的分布，在测试集2的分布中，同种类型的癌症聚在一起，分布类似，因而可以用来判断模型是否过拟合。
 
@@ -44,11 +44,11 @@ $$
 
 进一步筛选标签，本研究的目的是筛选分子标签辅助鉴别肺癌的两个亚型，因而在应用上追求是最小的分子标签有最好的分类结果。此时候选标签较多，为了进一步筛选，对训练集中的不同亚型转录本做差异基因分析，筛选出差异表达的候选标签。
 
-![](../.gitbook/assets/deseq.png) ![](../.gitbook/assets/edger.png)
+![](../../.gitbook/assets/deseq.png) ![](../../.gitbook/assets/edger.png)
 
 两种差异分析工具包，取交集，最终候选标签集合中有差异表达的基因如下；
 
-![](../.gitbook/assets/trans.png)
+![](../../.gitbook/assets/trans.png)
 
 将候选的基因标签，通过文献分为三类，先验转录组标签保留了18个基因\(如上图所示\)，先验突变基因标签保留18个，CNV变异的标签保留6个，从上图能够看出有5个基因，其在训练集和测试集的分布并不一致，占比并不高，这说明用基因的转录本做特征标签，对单个基因来讲表达趋势因为受很多因素影响，会存在一定的随机性，有可能导致模型不够准确。
 
@@ -107,11 +107,11 @@ for n,i in enumerate([trans,mut,cnv]):
 
 结果如下:
 
-![](../.gitbook/assets/lr.png)
+![](../../.gitbook/assets/lr.png)
 
 会发现，先验的转录差异的候选标签，CNV候选标签效果较好，突变候选标签几乎没有分类效果，This is rational，因为用的是转录数据，CNV变化有可能影响转录本的差异，而突变并不一定会导致转录水平的变化，所以候选标签采用Trans和CNV基因集合。
 
 最终将Trans和CNV系数不为0的基因合并到一起，再进行一次拟合和预测，下图为预测结果，在两个测试集中AUC都在80%以上，模型效果还可以。最终找出了9个基因分子标签，以用来辅助鉴别肺癌分型。
 
-![](../.gitbook/assets/lr2.png)
+![](../../.gitbook/assets/lr2.png)
 
