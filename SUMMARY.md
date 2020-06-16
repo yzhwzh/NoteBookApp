@@ -30,8 +30,9 @@
   * [T分布随机邻接嵌入](matrix/t-fen-bu-sui-ji-lin-jie-qian-ru.md)
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
 * [聚类算法](ju-lei-suan-fa/README.md)
-  * [K邻近算法](ju-lei-suan-fa/k-lin-jin-suan-fa.md)
+  * [K-means 聚类](ju-lei-suan-fa/kmeans-ju-lei.md)
 * [分类算法](fen-lei-suan-fa/README.md)
   * [决策树](fen-lei-suan-fa/jue-ce-shu.md)
   * [朴素贝叶斯](fen-lei-suan-fa/pu-su-bei-ye-si.md)
+  * [K邻近算法](fen-lei-suan-fa/k-lin-jin-suan-fa.md)
 
