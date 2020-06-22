@@ -31,6 +31,7 @@
   * [实战二：SVD与NMF](matrix/shi-zhan-er-svd-yu-nmf.md)
 * [聚类算法](ju-lei-suan-fa/README.md)
   * [K-means 聚类](ju-lei-suan-fa/kmeans-ju-lei.md)
+  * [学习向量量化](ju-lei-suan-fa/xue-xi-xiang-liang-liang-hua.md)
 * [分类算法](fen-lei-suan-fa/README.md)
   * [决策树](fen-lei-suan-fa/jue-ce-shu.md)
   * [朴素贝叶斯](fen-lei-suan-fa/pu-su-bei-ye-si.md)
