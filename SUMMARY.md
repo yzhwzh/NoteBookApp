@@ -35,6 +35,7 @@
   * [高斯混合聚类](ju-lei-suan-fa/gao-si-hun-he-ju-lei.md)
   * [密度聚类](ju-lei-suan-fa/mi-du-ju-lei.md)
   * [层次聚类](ju-lei-suan-fa/ceng-ci-ju-lei.md)
+  * [谱聚类](ju-lei-suan-fa/pu-ju-lei.md)
 * [EM算法](em-suan-fa.md)
 * [分类算法](fen-lei-suan-fa/README.md)
   * [决策树](fen-lei-suan-fa/jue-ce-shu.md)
