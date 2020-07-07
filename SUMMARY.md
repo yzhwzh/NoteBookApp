@@ -38,6 +38,8 @@
   * [谱聚类](ju-lei-suan-fa/pu-ju-lei.md)
 * [EM算法](em-suan-fa/README.md)
   * [EM算法原理](em-suan-fa/em-suan-fa-yuan-li.md)
+  * [EM算法与高斯混合模型](em-suan-fa/em-suan-fa-yu-gao-si-hun-he-mo-xing.md)
+  * [EM 算法与 kmeans 模型](em-suan-fa/em-suan-fa-yu-kmeans-mo-xing.md)
 * [分类算法](fen-lei-suan-fa/README.md)
   * [决策树](fen-lei-suan-fa/jue-ce-shu.md)
   * [朴素贝叶斯](fen-lei-suan-fa/pu-su-bei-ye-si.md)
