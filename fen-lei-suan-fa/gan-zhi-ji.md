@@ -34,7 +34,7 @@ description: Perceptron
 
 设 $$\vec{a} = (x_1,y_1,z_1) , \vec{b}= (x_2,y_2,z_2)$$ ，i，j，k分别是X，Y，Z轴方向的单位向量，则外积
 
-$$\vec{a}X\vec{b} = det\left| \begin{array}{ccc}i&j&k\\x_1&y_1&z_2\\x_2&y_2&z_2 \end{array} \right|$$ ；
+$$\vec{a}X\vec{b} = det\left| \begin{array}{ccc}i&j&k\\x_1&y_1&z_1\\x_2&y_2&z_2 \end{array} \right|$$ ；
 
 同时 $$\vec{a} X \vec{b}  =  (x_1,y_1,z_1) X  (x_2,y_2,z_2)  = (y_1z_2-z_1y_2,z_1x_2-x_1z_2,x_1y_2-y_1x_2)$$ 
 

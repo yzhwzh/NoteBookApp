@@ -21,7 +21,6 @@
     * [线性回归](hui-gui-suan-fa/linear/linear-regression.md)
     * [局部加权线性回归](hui-gui-suan-fa/linear/locally-weighted-linear-regression.md)
     * [对数几率回归](hui-gui-suan-fa/linear/logistic-regression.md)
-    * [感知机](hui-gui-suan-fa/linear/gan-zhi-ji.md)
     * [实战一：Logistic Regression分类预测](hui-gui-suan-fa/linear/shi-zhan-yi-logistic-regression-fen-lei-yu-ce.md)
 * [矩阵降维](matrix/README.md)
   * [主成分分析与奇异值分解](matrix/pcaandsvd.md)
@@ -45,4 +44,6 @@
   * [决策树](fen-lei-suan-fa/jue-ce-shu.md)
   * [朴素贝叶斯](fen-lei-suan-fa/pu-su-bei-ye-si.md)
   * [K邻近算法](fen-lei-suan-fa/k-lin-jin-suan-fa.md)
+  * [感知机](fen-lei-suan-fa/gan-zhi-ji.md)
+  * [支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji.md)
 
