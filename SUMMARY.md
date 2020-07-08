@@ -45,5 +45,6 @@
   * [朴素贝叶斯](fen-lei-suan-fa/pu-su-bei-ye-si.md)
   * [K邻近算法](fen-lei-suan-fa/k-lin-jin-suan-fa.md)
   * [感知机](fen-lei-suan-fa/gan-zhi-ji.md)
-  * [支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji.md)
+  * [支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/README.md)
+    * [线性可分支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/xian-xing-ke-fen-zhi-chi-xiang-liang-ji.md)
 
