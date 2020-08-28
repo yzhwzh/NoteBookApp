@@ -50,13 +50,13 @@
    因此需要对分离超平面施加某些约束，如归一化，令 $$||\mathbf {\vec w}||_2=1$$ ，使得函数间隔是确定的。此时的函数间隔成为几何间隔。
 
 2. 对于给定的训练数据集 $$\mathbb D$$ 和超平面 $$(\mathbf {\vec w},b)$$ 
-   * 定义超平面 $$(\mathbf {\vec w},b)$$ 关于样本点 $$(\mathbf {\vec x}_i,\tilde y_i)$$ 的几何间隔为： $$\gamma_i=\tilde y_i(\frac{\mathbf {\vec w}}{||\mathbf {\vec w}||_2}\cdot \mathbf {\vec x}_i+\frac{b}{||\mathbf {\vec w}||_2})$$ 
+   * 定义超平面 $$(\mathbf {\vec w},b)$$ 关于样本点 $$(\mathbf {\vec x}_i,\tilde y_i)$$ 的**几何间隔**为： $$\gamma_i=\tilde y_i(\frac{\mathbf {\vec w}}{||\mathbf {\vec w}||_2}\cdot \mathbf {\vec x}_i+\frac{b}{||\mathbf {\vec w}||_2})$$ 
    * 定义超平面 $$(\mathbf {\vec w},b)$$ 关于训练集 $$\mathbb D$$ 的几何间隔为：超平面 $$(\mathbf {\vec w},b)$$ 关于 $$\mathbb D$$ 中所有样本点 $$(\mathbf {\vec x}_i,\tilde y_i)$$ 的几何间隔之最小值： $$\gamma=\min_{\mathbb D} \gamma_i$$  。
 3. 由定义可知函数间隔和几何间隔有下列的关系： $$\gamma_i=\frac{\hat\gamma_i}{||\mathbf {\vec w}||_2},\quad \gamma=\frac{\hat\gamma}{||\mathbf {\vec w}||_2}$$ 
    * 当 $$||\mathbf {\vec w}||_2=1$$ 时，函数间隔和几何间隔相等。
    * 当超平面参数 $$\mathbf {\vec w},b$$ 等比例改变时：
      * 超平面并没有变化。
-     * 函数间隔也按比例改变。
+     * **函数间隔也按比例改变**。
      * 几何间隔保持不变。
 
 #### 1.3 硬间隔最大化
@@ -69,6 +69,8 @@
 3. 求解几何间隔最大的分离超平面可以表示为约束的最优化问题： $$\max_{\mathbf {\vec w},b} \gamma\\ s.t. \quad \tilde y_i(\frac{\mathbf {\vec w}}{||\mathbf {\vec w}||_2}\cdot \mathbf {\vec x}_i+\frac{b}{||\mathbf {\vec w}||_2}) \ge \gamma, i=1,2,\cdots,N$$ 
 
    考虑几何间隔和函数间隔的关系，改写问题为： $$\max_{\mathbf {\vec w},b} \frac{\hat\gamma}{||\mathbf {\vec w}||_2}\\ s.t. \quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge \hat\gamma, i=1,2,\cdots,N$$ 
+
+   > 几何间隔因为除以了模是确定的，函数间隔是可以按比例改变的
 
 4. 函数间隔 $$\hat \gamma$$ 的大小并不影响最优化问题的解。
 
