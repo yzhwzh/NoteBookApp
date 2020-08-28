@@ -47,5 +47,6 @@
   * [感知机](fen-lei-suan-fa/gan-zhi-ji.md)
   * [支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/README.md)
     * [线性可分支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/xian-xing-ke-fen-zhi-chi-xiang-liang-ji.md)
-    * [线性不可分线性支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/xian-xing-bu-ke-fen-xian-xing-zhi-chi-xiang-liang-ji.md)
+    * [线性支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/xian-xing-bu-ke-fen-xian-xing-zhi-chi-xiang-liang-ji.md)
+    * [非线性支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/fei-xian-xing-zhi-chi-xiang-liang-ji.md)
 
