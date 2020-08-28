@@ -14,7 +14,7 @@ description: 对于线性不可分训练数据，线性支持向量机不再适�
 
      即约束条件变成了： $$\tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge 1-\xi_i$$  。
 
-   * 对每个松弛变量 $$\xi_i$$ ，支付一个代价 $$\xi_i$$ 。目标函数由原来的 $$\frac 12 ||\mathbf {\vec w}||^{2}_2$$ 变成： $$\min \frac 12 ||\mathbf {\vec w}||^{2}_2+C\sum_{i=1}^{N}\xi_i$$ 
+   * 对每个松弛变量 $$\xi_i$$ ，支付一个代价 $$\xi_i$$ 。目标函数由原来的 $$\frac 12 ||\mathbf {\vec w}||^{2}_2$$ 变成： $$\min \frac 12 ||\mathbf {\vec w}||^{2}_2+C\sum_{i=1}^{N}\xi_i$$  **即不仅最大话支持向量所在点的距离也最小化每个点的松弛变量**
 
      这里 $$C \gt 0$$ 称作惩罚参数，一般由应用问题决定。
 
