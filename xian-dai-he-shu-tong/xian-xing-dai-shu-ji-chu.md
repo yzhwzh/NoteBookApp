@@ -58,6 +58,16 @@ $$AX=B\Rightarrow X=A^{-1}B$$，$$A$$可逆
 
 衡量矩阵的大小$$||A||_F = \sqrt [2]{\sum_{i,j}A_{i,j}^2}$$; 另外向量的点积可以用范数来表示 $$x^T*y=||x||_2*||y||_2*\cos\theta$$ 可由余弦公式进行推导： $$c^2=a^2+b^2-2ab *cos\theta$$ 
 
+#### 条件数
+
+数值分析中，一个问题的**条件数**是该数量在数值计算中的容易程度的衡量，也就是该问题的适定性。一个低条件数的问题称为**良置**的，而高条件数的问题称为**病态**（或者说非良置）的。
+
+ 线性方程 $$Ax=b$$ 的条件数给出了数值求解得到一个解$$x$$有多不精确的一个上限。条件数也会增大$$b$$中存在的误差。这个放大的程度可以使得一个低条件数的系统（通常是件好事情）变得不精确而使得一个高条件数的系统（通常是件坏事情）变得精确，这取决于$$b$$的数据知道得多清楚。对于这个问题，条件数定义为 $$\kappa(A) \ = \  \|A\| \|A^{-1}\|$$ 。若采用欧几里得范数即L2范数， $${\displaystyle \kappa (A)={\frac {\sigma _{max}(A)}{\sigma _{min}(A)}}}$$ ，其中 $${\displaystyle \sigma _{max}(A)}$$ 和 $${\displaystyle \sigma _{min}(A)}$$ 是$$A$$的极大和极小**奇异值**。若$$A$$是**正规矩阵，则** $${\displaystyle \kappa (A)=\left|{\frac {\lambda _{max}(A)}{\lambda _{min}(A)}}\right|}$$ ，其中 $${\displaystyle \lambda _{max}(A),\ \lambda _{min}(A)}$$ 为**特征值的最大值和最小值。若A为酉矩阵（** 酉矩阵是实数上的正交矩阵，在复数的推广**），则** $$\kappa (A) =1 $$ 
+
+> 一个矩阵A对应的范数度量了由该矩阵产生的映射能拉伸多少向量  $$M \ = \ \|A\| \ = \ {\max {{\|Ax\|} \over {\|x\|}}}$$ 。有时考虑一个矩阵能将向量缩小多少也很重要 $$m \ = \ {\min {{\|Ax\|} \over {\|x\|}}}$$ 。最小拉伸的倒数是逆的范数 $$m \ = \ {\min {{\|Ax\|} \over {\|x\|}}} \ = \ {\min {{\|y\|} \over {\|A^{-1} y\|}}} \ = \ 1/{\max {{\|A^{-1} y\|} \over {\|y\|}}} \ = \ 1/\|A^{-1}\|$$ 奇异矩阵是可以将非零向量映射成零向量的矩阵。对于一个奇异矩阵 $$m \ = \ 0$$ ，逆不存在。The ratio of the maximum to minimum stretching is **the condition number** for inversion. $$\kappa(A) \ = \  {{M} \over {m}}$$ 等价于 $$\kappa(A) \ = \  \|A\| \|A^{-1}\|$$ ，若为奇异矩阵，its condition number is infinite。
+
+
+
 **相关乘法**
 
 1. 元素对应乘积 or Hadamard 乘积$$A \bigodot B$$ 每个对应位置上的元素相乘
