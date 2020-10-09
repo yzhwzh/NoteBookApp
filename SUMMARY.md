@@ -23,6 +23,7 @@
     * [对数几率回归](hui-gui-suan-fa/linear/logistic-regression.md)
     * [实战一：Logistic Regression分类预测](hui-gui-suan-fa/linear/shi-zhan-yi-logistic-regression-fen-lei-yu-ce.md)
 * [矩阵降维](matrix/README.md)
+  * [潜在狄利克雷分配\(LDA\)](matrix/qian-zai-di-li-ke-lei-fen-pei-lda.md)
   * [主成分分析与奇异值分解](matrix/pcaandsvd.md)
   * [线性判别分析与多维尺度变换](matrix/ldaandmds.md)
   * [非负矩阵分解](matrix/nmf.md)
