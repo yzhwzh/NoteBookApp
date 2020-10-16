@@ -26,6 +26,22 @@
 
    这就是 `SVR`原始问题。
 
+**重新理解：**
+
+**在常规的线性回归问题中，L2损失函数为** $$\min_{\mathbf{\vec w},b} \sum_{i=1}^n(y_i-\hat y_i)^2+\lambda ||w||^2$$，即如果模型输出与真实输出的差别不为0则计算损失函数。
+
+而在支持向量回归中，允许模型输出与真实输出有 $$\epsilon$$ 的偏差。仅当 $$|y_i-\tilde y_i| \gt \epsilon$$ 时，才计算损失。即 $$L_\epsilon(y_i-\tilde y_i)=\begin{cases} 0&, \text{if} |y_i-\tilde y_i| \le \epsilon\\ |y_i-\tilde y_i|-\epsilon&,\text{else} \end{cases}$$ 
+
+将之代入线性回归的损失函数，就变为$$\min_{\mathbf{\vec w},b} \frac 12 ||\mathbf{\vec w}||_2^{2}+C\sum_{i=1}^{N}L_\epsilon\left(y_i-\tilde y_i\right)$$,$$C$$ 为罚项常数, $$\lambda$$设为1/2 利于求导。上述目标函数含有绝对值项不可微。可以转化成一个约束优化问题，常用的方法是为每一个样本数据定义两个松弛变量 $$\xi_i \ge 0  ; \hat \xi_i \ge 0$$ 表示度量$$y_i$$与边界 $$\epsilon$$ 的距离，当样本点真实值位于管道上方时，$$\xi_i>0$$,写成表达式： $$y_i-\tilde y_i-\epsilon \le \xi_i； \tilde \xi_i =0$$ ; 当样本点位于管道下方， $$\tilde \xi_i > 0$$ ,此时 $$\tilde y_i- y_i-\epsilon \le \tilde \xi_i； \xi_i =0$$ ;
+
+> $$y_i$$是真实的点，$$\tilde y_i$$是预测的超平面上的点
+
+因而损失函数就写为
+
+$$
+\min_{\mathbf{ \vec w},b,\xi_i,\hat\xi_i}\frac 12 ||\mathbf{\vec w}||_2^{2}+C\sum_{i=1}^{N} (\xi_i+\hat \xi_i)\\ s.t. y_i-\tilde y_i \le \epsilon+\xi_i,\\ \tilde y_i-y_i \le \epsilon+\hat\xi_i,\\ \xi_i \ge 0,\hat\xi_i \ge 0, i=1,2,\cdots,N
+$$
+
 #### 4.2 对偶问题
 
 1. 引入拉格朗日乘子 $$\mu_i \ge 0,\hat \mu_i \ge 0,\alpha_i \ge 0,\hat\alpha_i \ge 0$$ ，定义拉格朗日函数： $$L(\mathbf{\vec w},b,\vec\alpha,\hat{\vec\alpha},\vec\xi,\hat{\vec\xi},\vec\mu,\hat{\vec\mu}) =\frac 12 ||\mathbf{\vec w}||_2^{2}+C\sum_{i=1}^{N}( \xi_i+\hat\xi_i)-\sum_{i=1}^{N}\mu_i\xi_i-\sum_{i-1}^{N}\hat\mu_i\hat\xi_i\\ +\sum_{i=1}^{N}\alpha_i\left( f(\mathbf{\vec x}_i)-\tilde y_i-\epsilon-\xi_i \right)+\sum_{i-1}^{N}\hat\alpha_i\left(\tilde y_i-f(\mathbf{\vec x}_i)-\epsilon-\hat\xi_i\right)$$ 
