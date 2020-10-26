@@ -8,6 +8,7 @@
     * [1. 重要分布](xian-dai-he-shu-tong/shu-li-tong-ji/1.-zhong-yao-fen-bu.md)
     * [2. 参数估计](xian-dai-he-shu-tong/shu-li-tong-ji/2.-can-shu-gu-ji.md)
     * [3. 假设检验](xian-dai-he-shu-tong/shu-li-tong-ji/3.-jia-she-jian-yan.md)
+    * [4.方差分析](xian-dai-he-shu-tong/shu-li-tong-ji/4.-fang-cha-fen-xi.md)
 * [数据处理相关](shu-ju-chu-li/README.md)
   * [数据探索分析](shu-ju-chu-li/shu-ju-tan-suo-fen-xi.md)
   * [缺失值处理](shu-ju-chu-li/que-shi-zhi-chu-li.md)
