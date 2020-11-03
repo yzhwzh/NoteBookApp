@@ -34,5 +34,17 @@
    * `hardmax` 把一个向量 $$\mathbf{\vec x} $$  映射成向量 $$(0,\cdots,0,1,0,\cdots,0)^T$$  。即： $$\mathbf{\vec x} $$ 最大元素的位置填充`1`，其它位置填充`0`。
    * `softmax` 会在这些位置填充`0.0~1.0` 之间的值（如：某个概率值）。
 
+#### 1.2 Conditioning
 
+1. `Conditioning`刻画了一个函数的如下特性：当函数的输入发生了微小的变化时，函数的输出的变化有多大。
+
+   对于`Conditioning`较大的函数，在数值计算中可能有问题。因为函数输入的舍入误差可能导致函数输出的较大变化。
+
+2. 对于方阵 $$\mathbf A\in \mathbb R^{n\times n}$$ ，其条件数`condition number`为： $$\text{condition number}=\max_{1\le i,j\le n,i\ne j}\left|\frac{\lambda_i}{\lambda_j} \right|$$ 
+
+   其中 $$\lambda_i,i=1,2,\cdots,n$$ 为 $$A$$ 的特征值。
+
+   * **方阵的条件数就是最大的特征值除以最小的特征值。**
+   * **当方阵的条件数很大时，矩阵的求逆将对误差特别敏感（即：  的一个很小的扰动，将导致其逆矩阵一个非常明显的变化）。**
+   * **条件数是矩阵本身的特性，它会放大那些包含矩阵求逆运算过程中的误差。**
 
