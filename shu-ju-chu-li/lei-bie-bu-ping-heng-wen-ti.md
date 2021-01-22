@@ -145,3 +145,5 @@ plot_2d_space(X_tl, y_tl,X,y, 'Tomek links under-sampling')
 * [ ]  **Over-sampling: SMOTE \(Synthetic Minority Oversampling Technique\)** consists of synthesizing elements for the minority class, based on those that already exist. It works randomly picking a point from the minority class and computing the k-nearest neighbors for this point. The synthetic points are added between the chosen point and its neighbors.（从该少数类的全部 $$T $$个样本中找到样本$$ x_i$$ 的$$ k$$ 个近邻，然后从这$$ k$$ 个近邻中随机选择一个样本 $$x_i(nn)$$ ，再生成一个 0 到 1 之间的随机数 $$\epsilon_1$$ ，与该样本相加，从而合成一个新样本 $$x_{i1}$$，重复$$N$$次）
 * \*\*\*\*
 
+![](../.gitbook/assets/image%20%2838%29.png)
+
