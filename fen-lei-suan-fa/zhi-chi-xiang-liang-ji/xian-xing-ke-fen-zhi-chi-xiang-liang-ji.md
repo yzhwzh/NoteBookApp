@@ -68,7 +68,7 @@
 
    考虑几何间隔和函数间隔的关系，改写问题为： $$\max_{\mathbf {\vec w},b} \frac{\hat\gamma}{||\mathbf {\vec w}||_2}\\ s.t. \quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge \hat\gamma, i=1,2,\cdots,N$$ 
 
-   > 几何间隔因为除以了模是确定的，函数间隔是可以按比例改变的
+   > 几何间隔因为除以了模是确定的，函数间隔是可以按比例改变的$$\quad \gamma=\frac{\hat\gamma}{||\mathbf {\vec w}||_2}$$ $$\gamma$$ 是几何间隔， $$\hat\gamma$$是函数间隔
 
 4. 函数间隔 $$\hat \gamma$$ 的大小并不影响最优化问题的解。
 
