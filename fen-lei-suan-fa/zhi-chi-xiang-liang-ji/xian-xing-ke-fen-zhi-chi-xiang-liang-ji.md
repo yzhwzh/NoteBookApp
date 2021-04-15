@@ -77,7 +77,7 @@
    * 这一变化对求解最优化问题的不等式约束没有任何影响。
    * 这一变化对最优化目标函数也没有影响。
 
-   因此取 $$\hat\gamma =1$$ ，则最优化问题改写为 $$\max_{\mathbf {\vec w},b} \frac{1}{||\mathbf {\vec w}||_2}\\ s.t. \quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge 1, i=1,2,\cdots,N$$ ：
+   因此取 $$\hat\gamma =1$$ ，可以理解为求   $$\quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge 1$$     和求 $$\quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge \hat\gamma$$    所求出的超平面并没有改变，只是系数同比扩张了 $$\hat\gamma$$    倍，则最优化问题改写为 $$\max_{\mathbf {\vec w},b} \frac{1}{||\mathbf {\vec w}||_2}\\ s.t. \quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) \ge 1, i=1,2,\cdots,N$$ ：
 
 5. 注意到 $$\max \frac{1}{||\mathbf {\vec w}||_2}$$ 和  $$\min \frac 12 ||\mathbf {\vec w}||_2^{2}$$ 是等价的，于是最优化问题改写为： $$\min_{\mathbf {\vec w},b} \frac 12 ||\mathbf {\vec w}||_2^{2}\\ s.t. \quad \tilde y_i(\mathbf {\vec w} \cdot \mathbf {\vec x}_i+b) -1 \ge 0, i=1,2,\cdots,N$$ 
 
