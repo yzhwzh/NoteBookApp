@@ -52,4 +52,6 @@
     * [线性支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/xian-xing-bu-ke-fen-xian-xing-zhi-chi-xiang-liang-ji.md)
     * [非线性支持向量机](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/fei-xian-xing-zhi-chi-xiang-liang-ji.md)
     * [支持向量回归](fen-lei-suan-fa/zhi-chi-xiang-liang-ji/zhi-chi-xiang-liang-hui-gui.md)
+* [集成学习](ji-cheng-xue-xi/README.md)
+  * [集成学习误差](ji-cheng-xue-xi/ji-cheng-xue-xi-wu-cha.md)
 
